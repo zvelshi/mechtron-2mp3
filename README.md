@@ -1,2 +1,2 @@
 # mechtron-2mp3
- all coursework from MECHTRON2MP3
+ practice area for MECHTRON 2MP3
