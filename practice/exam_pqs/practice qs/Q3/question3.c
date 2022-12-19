@@ -1,8 +1,63 @@
 //Encrypted-Key Dictionaries
 #include<stdio.h>
 #include<stdlib.h>
+#include<assert.h>
 
+typedef struct Edict {
+	int n;
+	struct Slot* slots;
+	int (*encrypt)(int);
+} Edict;
 
+typedef struct Slot {
+	int key;
+	int n;
+	int* values;
+} Slot;
+
+Edict* createEdict(int (*encrypt)(int)) {
+	Edict* t = malloc(sizeof(Edict));
+	t->n = 0;
+	t->encrypt = encrypt;
+	t->slots = NULL;
+	return t;
+}
+
+void destroyEdict(Edict* t) {
+	for (int i = 0; i < t->n; i++) {
+		free(t->slots[i].values);
+	}
+	free(t->slots);
+	free(t);
+}
+
+int insertValue(Edict* d, int val){
+	if (d == NULL) {
+		return -1;
+	}
+	int key = d->encrypt(val);
+	for (int i = 0; i < d->n; i++) {
+		if (d->slots[i].key == key) {
+			d->slots[i].n++;
+			d->slots[i].values = realloc(d->slots[i].values, d->slots[i].n * sizeof(int));
+			if (d->slots[i].values == NULL) {
+				return -1;
+			}
+			d->slots[i].values[d->slots[i].n - 1] = val;
+			return 0;
+		}
+	}
+	d->n++;
+	d->slots = realloc(d->slots, d->n * sizeof(Slot));
+	d->slots[d->n - 1].key = key;
+	d->slots[d->n - 1].n = 1;
+	d->slots[d->n - 1].values = malloc(sizeof(int));
+	if (d->slots[d->n - 1].values == NULL) {
+		return -1;
+	}
+	d->slots[d->n - 1].values[0] = val;
+	return 0;
+}
 
 void printEntry (Slot* entry) {
 	printf("| |--- Encrypted Value = %d ---\n", entry->key);
