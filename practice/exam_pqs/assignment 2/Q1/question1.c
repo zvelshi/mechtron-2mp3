@@ -8,9 +8,9 @@ double median(int* x, int size);
 int mode(int* x, int size);
 
 int main () {
-    int x[] = {1,2,5,6,8,9};
+    int x[] = {9, 10, 12, 13, 13, 13, 15, 15, 16, 16, 18, 22, 23, 24, 24, 25};
     int size = sizeof(x)/sizeof(x[0]);
-    printf("mean: %f, median: %f\n", mean(x,size), median(x,size));
+    printf("mean: %f, median: %f, mode: %d\n", mean(x,size), median(x,size), mode(x,size));
     return 0;
 }
 
@@ -29,4 +29,24 @@ double median(int *x, int size){
     if (size%2==0) i++;
     int mid = floor((size-i)/2);
     return x[mid];
+}
+
+int mode(int* x, int size){
+    int i = 0;
+    int j = 0;
+    int count = 0;
+    int max = 0;
+    int mode = 0;
+    while (i < size){
+        while (j < size){
+            if (x[i]==x[j]) count++;
+            j++;
+        }
+        if (count > max){
+            max = count;
+            mode = x[i];
+        }
+        i++;
+    }
+    return mode;
 }
