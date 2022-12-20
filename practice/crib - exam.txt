@@ -1,0 +1,91 @@
+PULL THEN PUSH
+
+x % 2 == 0 when even
+
+------headers------
+stdio.h -> standard i/o library, printf, scanf, file stuff, NULL
+stdlib.h -> malloc stuff
+stdbool.h -> booleans (bool x = true/false)
+math.h -> math stuffsss (remember -lm)
+string.h -> char* concat [strcat(char *dest, char *src)], copy [strcpy(char *dest, char *src)], length [strlen(char *str)] 
+
+------printf------
+%d or %i- int
+%c - char
+%f - float
+%p - memory address
+
+------git------
+git add .
+git commit -m "comment"
+git push origin
+
+------gcc------
+gcc -example.c -o example -lm
+
+------macros------
+#define SIZE 24 (replace all instances of SIZE with 24)
+
+------arrs------
+int count[2] = {1,2};
+sizeof(arr)/sizeof(arr[0])
+int x[num row (3)][num cols (2)] = {{7,3},{2,5},{8,2}}
+
+------strings------
+char str[8] = "bar" -> [b a r \0 \0 \0 \0 \0] 
+strtok(str, strdelim): split a string by the deliminator
+
+token = strtok(str, s);
+while(token != NULL) {
+printf( " %s\n", token );
+token = strtok(NULL, s);
+}
+
+------pointers------
+int* ptr -> ptr points to a seg of memory size of int
+
+int y = 6; -> a directly referencable variable
+int *yp = &y; -> a pointer that points to the address of y
+
+print("%p", *yp); -> dereferences &y and is just a pointer directly to the value stored at the memory address &y
+
+foo[3] ≡ *(foo + 3)
+
+------sorting algos------
+
+bubble
+- compares each pair of consecutive elements and swaps according to order
+- after 1 pass the last el will be in the right place
+- takes n-1 passes to sort the entire array
+
+insertion
+- makes one pass only
+- for each el, unsorted el is compared to largest el in sorted aray
+- if unsorted is smaller, they're swaped
+- this proceeds until unsorted is >= to el its compared to which means sorted
+
+------bitwise------
+& and
+| or
+^ xor
+~ not
+>> right
+<< left
+
+------struct------
+typedef struct [name]{
+	[definitions]
+} [name];
+
+function pointer definitions: [type] (*name)(inputtype)
+referencing something in a struct: varname->innervar
+
+------malloc/realloc------
+malloc(sizeof([type])) -> returns a pointer
+relloc((*ptr to be realloced), (new size in bytes)) -> returns a pointer to newly alloced stuff
+
+------fileio------
+inputname="nameoffile.csv"
+FILE *name = fopen(inputName, opentype)
+fgets(string, int, file) <- str: pointer to where the chars are being stored, int: max num chars to be read INCLUDING NULL
+fclose(filename)

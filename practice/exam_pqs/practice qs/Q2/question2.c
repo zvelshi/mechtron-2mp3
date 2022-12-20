@@ -4,6 +4,7 @@
 #include<stdlib.h>
 
 float avgCSV (char* inputName);
+void sortCSV (char* inputName);
 
 int main () {
 	printf("%f\n", avgCSV("sample_data.csv"));
@@ -27,4 +28,10 @@ float avgCSV(char* inputName){
 	}
 	fclose(fp);
 	return sum / count;
+}
+
+void sortCSV(char* inputName){
+	FILE *fp = fopen(inputName, "r");
+	char line[100];
+	int *arr = malloc(100*sizeof(int));
 }
